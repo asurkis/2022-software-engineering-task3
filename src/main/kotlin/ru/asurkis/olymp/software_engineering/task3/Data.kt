@@ -21,8 +21,16 @@ data class PrizeDescription(
 )
 
 data class RaffleResultDescription(
-    val participant: ParticipantDescription,
+    val winner: ParticipantDescription,
     val prize: PrizeDescription
+)
+
+fun describeParticipant(participant: Participant) = ParticipantDescription(id = participant.id, name = participant.name)
+fun describePrize(prize: Prize) = PrizeDescription(id = prize.id, description = prize.description)
+
+fun describeRaffleResult(raffleResult: RaffleResult) = RaffleResultDescription(
+    winner = describeParticipant(raffleResult.winner),
+    prize = describePrize(raffleResult.prize)
 )
 
 @Entity
@@ -61,8 +69,16 @@ data class RaffleResult(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int,
-    @ManyToOne
+
+    @OneToOne
     var winner: Participant,
+
+    @OneToOne
+    var prize: Prize,
+
     @ManyToOne
-    var prize: Prize
+    var promo: Promo
 )
+
+data class PrizeForm(var description: String)
+data class ParticipantForm(val name: String)
