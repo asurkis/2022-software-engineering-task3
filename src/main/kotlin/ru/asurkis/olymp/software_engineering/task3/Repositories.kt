@@ -14,5 +14,4 @@ interface ParticipantRepository : CrudRepository<Participant, Int> {
 
 interface RaffleRepository : CrudRepository<RaffleResult, Int> {
     fun findByPromo(promo: Promo): Iterable<RaffleResult>
-    fun deleteByPromo(promo: Promo)
 }

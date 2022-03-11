@@ -83,7 +83,7 @@ class Controllers(
             throw ConflictException()
         }
         if (list.size != prizes.size) {
-            raffleRepository.deleteByPromo(promo)
+            raffleRepository.deleteAll(list)
             list = participants.zip(prizes.shuffled()).map {
                 RaffleResult(
                     id = 0,

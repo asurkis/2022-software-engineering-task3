@@ -49,7 +49,7 @@ data class Prize(
     var id: Int,
     var description: String,
 
-    @ManyToOne
+    @ManyToOne(cascade = [CascadeType.REMOVE])
     var promo: Promo
 )
 
@@ -60,7 +60,7 @@ data class Participant(
     var id: Int,
     var name: String,
 
-    @ManyToOne
+    @ManyToOne(cascade = [CascadeType.REMOVE])
     var promo: Promo
 )
 
@@ -70,13 +70,13 @@ data class RaffleResult(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int,
 
-    @OneToOne
+    @OneToOne(cascade = [CascadeType.REMOVE])
     var winner: Participant,
 
-    @OneToOne
+    @OneToOne(cascade = [CascadeType.REMOVE])
     var prize: Prize,
 
-    @ManyToOne
+    @ManyToOne(cascade = [CascadeType.REMOVE])
     var promo: Promo
 )
 
